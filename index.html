@@ -24,23 +24,12 @@
             text-align: center;
         }
 
-        .logo {
-            width: 120px;
-            height: 120px;
+        .app-icon {
+            width: 128px;
+            height: 128px;
             margin: 0 auto 32px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-
-        .logo-text {
-            font-size: 36px;
-            font-weight: 700;
-            color: #3fbe77;
-            letter-spacing: -1px;
         }
 
         h1 {
@@ -130,6 +119,10 @@
             margin-top: 48px;
             font-size: 13px;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
         .footer a {
@@ -140,13 +133,21 @@
         .footer a:hover {
             color: #3fbe77;
         }
+
+        .remidio-logo {
+            height: 28px;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .remidio-logo:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <span class="logo-text">N</span>
-        </div>
+        <img src="app-icon.png" alt="Neubo App Icon" class="app-icon">
 
         <h1>Neubo</h1>
         <p class="subtitle">
@@ -154,7 +155,7 @@
             Built for Remidio devices on macOS.
         </p>
 
-        <a id="download-btn" class="download-btn" href="https://github.com/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/releases/latest">
+        <a id="download-btn" class="download-btn" href="#">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
             </svg>
@@ -162,6 +163,7 @@
         </a>
 
         <p class="version-info">
+            <span id="version-label"></span><br>
             <a href="https://github.com/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/releases">View all releases</a>
         </p>
 
@@ -174,9 +176,30 @@
         </div>
 
         <div class="footer">
+            <a href="https://remidio.com">
+                <img src="remidio-logo.png" alt="Remidio" class="remidio-logo">
+            </a>
             <p>&copy; Remidio Innovative Solutions Pvt. Ltd.</p>
-            <p><a href="https://remidio.com">remidio.com</a></p>
         </div>
     </div>
+
+    <script>
+        // Fetch latest release and set direct DMG download link
+        fetch('https://api.github.com/repos/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/releases/latest')
+            .then(r => r.json())
+            .then(release => {
+                const dmg = release.assets.find(a => a.name.endsWith('.dmg'));
+                if (dmg) {
+                    document.getElementById('download-btn').href = dmg.browser_download_url;
+                }
+                const version = release.tag_name.replace('v', '');
+                document.getElementById('version-label').textContent = 'Latest: ' + release.name;
+            })
+            .catch(() => {
+                // Fallback to releases page
+                document.getElementById('download-btn').href =
+                    'https://github.com/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/releases/latest';
+            });
+    </script>
 </body>
 </html>
