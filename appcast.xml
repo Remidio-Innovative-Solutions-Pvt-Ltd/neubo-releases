@@ -5,15 +5,5 @@
         <link>https://raw.githubusercontent.com/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/main/appcast.xml</link>
         <description>Automatic updates for Neubo</description>
         <language>en</language>
-        <item>
-            <title>Neubo 1.0.0 (build 16)</title>
-            <pubDate>Tue, 09 Jun 2026 07:31:21 +0000</pubDate>
-            <enclosure
-                url="https://github.com/Remidio-Innovative-Solutions-Pvt-Ltd/neubo-releases/releases/download/v1.0.0-16/Neubo-1.0.0-16.dmg"
-                sparkle:version="16"
-                sparkle:shortVersionString="1.0.0"
-                type="application/x-apple-diskimage"
-                sparkle:edSignature="DvH93Xm7MYEs//ipa7Lvs4B9qKTcdPWjGfZbKUAdT29xqhwIvu26W/pGdjslakD1F+1M1gFY4aDiQP9cAjzZDQ==" length="166182565" />
-        </item>
     </channel>
 </rss>
